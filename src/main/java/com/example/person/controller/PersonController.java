@@ -1,7 +1,8 @@
 package com.example.person.controller;
 
-import com.example.person.entity.Person;
+import com.example.person.dto.PersonDTO;
 import com.example.person.services.PersonService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> create(@RequestBody Person request) {
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(request));
     }
 }
