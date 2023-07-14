@@ -1,7 +1,5 @@
 package com.example.person.dto;
 
-import com.example.person.entity.Person;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +14,5 @@ public class AddressDTO {
     private String zipcode;
     private Integer number;
     private String city;
-    private Person person;
+    private PersonDTO personDTO;
 }
