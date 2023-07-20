@@ -4,6 +4,11 @@ import com.example.person.dto.AddressDTO;
 import com.example.person.entity.Address;
 import com.example.person.repositories.AddressRepository;
 
+import jakarta.transaction.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +23,16 @@ public class AddressService {
         this.mapper = mapper;
     }
 
-    public AddressDTO save(AddressDTO request) {
-        Address address = mapper.map(request, Address.class);
-        Address created = addressRepository.save(address);
-        return mapper.map(created, AddressDTO.class);
+    public Address save(AddressDTO request) {
+        Address response = mapper.map(request, Address.class);
+        return addressRepository.save(response);
+    }
+
+    @Transactional
+    public List<AddressDTO> listAddressesBelongingToPersonId(final Long personId) {
+        return addressRepository.listAddressesBelongingToPersonId(personId)
+                .stream()
+                .map(AddressDTO::new)
+                .collect(Collectors.toList());
     }
 }

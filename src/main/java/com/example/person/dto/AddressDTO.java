@@ -1,5 +1,10 @@
 package com.example.person.dto;
 
+import org.springframework.beans.BeanUtils;
+
+import com.example.person.entity.Address;
+import com.example.person.entity.Person;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +19,9 @@ public class AddressDTO {
     private String zipcode;
     private Integer number;
     private String city;
-    private PersonDTO personDTO;
+    private Person person;
+
+    public AddressDTO(Address entity) {
+        BeanUtils.copyProperties(entity, this);
+    }
 }
