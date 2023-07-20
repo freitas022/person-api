@@ -23,19 +23,16 @@ public class PersonService {
         this.mapper = mapper;
     }
 
-    public PersonDTO save(PersonDTO request) {
-        Person person = mapper.map(request, Person.class);
-        Person created = personRepository.save(person);
-        return mapper.map(created, PersonDTO.class);
+    public Person save(PersonDTO request) {
+        return personRepository.save(mapper.map(request, Person.class));
     }
 
-    public PersonDTO update(final Long id, PersonDTO request) {
+    public Person update(final Long id, PersonDTO request) {
         return personRepository.findById(id).map(person -> {
             setIfNonNull(person::setName, request.getName());
             setIfNonNull(person::setBirthdate, request.getBirthdate());
 
-            Person savePerson = personRepository.save(person);
-            return mapper.map(savePerson, PersonDTO.class);
+            return personRepository.save(person);
         }).orElseThrow(() -> new NotFoundException(id));
     }
 

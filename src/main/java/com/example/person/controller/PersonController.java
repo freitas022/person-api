@@ -1,9 +1,11 @@
 package com.example.person.controller;
 
 import com.example.person.dto.PersonDTO;
+import com.example.person.entity.Person;
 import com.example.person.services.PersonService;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,12 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO request) {
+    public ResponseEntity<Person> create(@RequestBody PersonDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(request));
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<PersonDTO> update(@PathVariable final Long id, @RequestBody PersonDTO request) {
+    public ResponseEntity<Person> update(@PathVariable final Long id, @RequestBody PersonDTO request) {
         return ResponseEntity.ok().body(personService.update(id, request));
     }
 
